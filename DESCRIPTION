@@ -21,3 +21,5 @@ Description: Posterior samples for Bayesian linear models via geometrically
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/asbates/geblm
+BugReports: https://github.com/asbates/geblm/issues
