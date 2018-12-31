@@ -1,12 +1,23 @@
 Package: geblm
-Title: What the Package Does (One Line, Title Case)
+Title: Geometrically Ergodic Bayesian Linear Models
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
+Authors@R: c(
+    person(given = "Andrew",
+           family = "Bates",
            role = c("aut", "cre"),
-           email = "first.last@example.com")
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "andrewbates73@gmail.com"),
+    person(given = "Patrick",
+           family = "De Jesus",
+           role = "aut",
+    person(given = "Jorge",
+           family = "Roman",
+           rol = "aut",
+           email = "jcroman@sdsu.edu"))
+Description: Posterior samples for Bayesian linear models via geometrically
+    convergent Gibbs samplers. Linear models with a proper normal-gamma prior
+    are supported as well as linear mixed models with both improper and proper
+    priors. Geometric ergodicity of the Gibbs samplers allow for computation of
+    MCMC standard error estimates.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
