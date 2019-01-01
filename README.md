@@ -18,3 +18,7 @@ geblm is not yet available on [CRAN](https://CRAN.R-project.org). You can instal
 devtools::install_github("https://github.com/asbates/geblm")
 ```
 
+## Background
+
+JC Roman came up with the idea for this package based on his research establishing conditions for geometric ergodicity of Gibbs samplers. The first iteration of this package was developed by JC and Patrick De Jesus. After laying dormant for a while, I started working on it in the fall of 2018.
+
