@@ -1,4 +1,4 @@
-# geblm
+# geblm: Geometrically Ergodic Bayesian Linear Models
 
 geblm uses geometrically ergodic Gibbs samplers to provide posterior samples for Bayesian linear models and linear mixed models. Using Markov chains that converge at a geometric rate means that a central limit theorem exists and allows for computation of MCMC standard error estimates.
 
@@ -12,11 +12,13 @@ Unlike many MCMC samplers, the algorithms provided in geblm are model specific. 
 
 ## Installation
 
-geblm is not yet available on [CRAN](https://CRAN.R-project.org). You can install it via the devtools package with:
+geblm is in early development and subject to (possibly substantial) changes. As such, it is not available on [CRAN](https://CRAN.R-project.org). You can install it via the devtools package with:
 
 ``` r
 devtools::install_github("https://github.com/asbates/geblm")
 ```
+
+
 
 ## Background
 
