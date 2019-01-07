@@ -23,3 +23,5 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/asbates/geblm
 BugReports: https://github.com/asbates/geblm/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
