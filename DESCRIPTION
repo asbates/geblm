@@ -24,7 +24,9 @@ LazyData: true
 URL: https://github.com/asbates/geblm
 BugReports: https://github.com/asbates/geblm/issues
 LinkingTo: 
-    Rcpp
+    Rcpp,
+    RcppEigen
 Imports: 
-    Rcpp
+    Rcpp,
+    checkmate
 RoxygenNote: 6.1.1
