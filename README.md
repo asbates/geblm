@@ -15,7 +15,7 @@ Unlike many MCMC samplers, the algorithms provided in geblm are model specific. 
 geblm is in early development and subject to (possibly substantial) changes. As such, it is not available on [CRAN](https://CRAN.R-project.org). You can install it via the devtools package with:
 
 ``` r
-devtools::install_github("https://github.com/asbates/geblm")
+devtools::install_github("asbates/geblm")
 ```
 
 
