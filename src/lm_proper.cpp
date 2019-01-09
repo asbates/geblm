@@ -8,16 +8,16 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-Eigen::MatrixXd lm_proper_cpp(Eigen::MatrixXd X,
-                            Eigen::VectorXd y,
-                            Eigen::VectorXd beta_prior_mean,
-                            Eigen::MatrixXd beta_prior_cov,
-                            double tau_prior_shape,
-                            double tau_prior_rate,
-                            int iterations,
-                            int burnin,
-                            int thin,
-                            Eigen::VectorXd start_beta){
+List lm_proper_cpp(Eigen::MatrixXd X,
+                   Eigen::VectorXd y,
+                   Eigen::VectorXd beta_prior_mean,
+                   Eigen::MatrixXd beta_prior_cov,
+                   double tau_prior_shape,
+                   double tau_prior_rate,
+                   int iterations,
+                   int burnin,
+                   int thin,
+                   Eigen::VectorXd start_beta){
   int n = X.rows();
   int r = X.cols();
 
@@ -70,13 +70,9 @@ Eigen::MatrixXd lm_proper_cpp(Eigen::MatrixXd X,
     sigma_out(i) = 1.0 / std::pow(temp_tau, 0.5);
   }
 
-  Eigen::MatrixXd result(beta_out.rows(), beta_out.cols() + 1);
-  result << beta_out, sigma_out;
-  return result;
-
-  //return List::create(
-  //  Named("beta") = beta_out,
- //   Named("sigma") = sigma_out
- // );
+  return List::create(
+    Named("beta") = beta_out,
+    Named("sigma") = sigma_out
+  );
 
 }

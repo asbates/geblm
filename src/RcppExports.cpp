@@ -31,7 +31,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // lm_proper_cpp
-Eigen::MatrixXd lm_proper_cpp(Eigen::MatrixXd X, Eigen::VectorXd y, Eigen::VectorXd beta_prior_mean, Eigen::MatrixXd beta_prior_cov, double tau_prior_shape, double tau_prior_rate, int iterations, int burnin, int thin, Eigen::VectorXd start_beta);
+List lm_proper_cpp(Eigen::MatrixXd X, Eigen::VectorXd y, Eigen::VectorXd beta_prior_mean, Eigen::MatrixXd beta_prior_cov, double tau_prior_shape, double tau_prior_rate, int iterations, int burnin, int thin, Eigen::VectorXd start_beta);
 RcppExport SEXP _geblm_lm_proper_cpp(SEXP XSEXP, SEXP ySEXP, SEXP beta_prior_meanSEXP, SEXP beta_prior_covSEXP, SEXP tau_prior_shapeSEXP, SEXP tau_prior_rateSEXP, SEXP iterationsSEXP, SEXP burninSEXP, SEXP thinSEXP, SEXP start_betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
