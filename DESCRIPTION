@@ -31,4 +31,7 @@ Imports:
     checkmate
 RoxygenNote: 6.1.1
 Suggests: 
-    testthat
+    testthat,
+    covr
+Depends: 
+    R (>= 3.1)
