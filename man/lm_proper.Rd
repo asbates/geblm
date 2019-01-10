@@ -4,14 +4,20 @@
 \alias{lm_proper}
 \title{Fit a Bayesian linear model with Normal-Gamma prior via Gibbs Sampling.}
 \usage{
-lm_proper(data, formula, beta_prior_mean, beta_prior_cov, tau_prior_shape,
-  tau_prior_rate, iterations = 5000, burnin = 5000, thin = 1,
-  start_beta = NULL)
+lm_proper(data, formula, burnin = 5000, iterations = 5000, thin = 1,
+  beta_prior_mean, beta_prior_cov, tau_prior_shape, tau_prior_rate,
+  start_beta)
 }
 \arguments{
 \item{data}{A data frame containing the variables to be used in the model.}
 
 \item{formula}{A formula object describing the model fit.}
+
+\item{burnin}{Number of burn in iterations}
+
+\item{iterations}{Number of MCMC iterations}
+
+\item{thin}{Number of thinning iterations}
 
 \item{beta_prior_mean}{Mean vector for the prior on \eqn{\beta}.}
 
@@ -20,12 +26,6 @@ lm_proper(data, formula, beta_prior_mean, beta_prior_cov, tau_prior_shape,
 \item{tau_prior_shape}{Shape parameter for the prior on \eqn{\tau}.}
 
 \item{tau_prior_rate}{Rate parameter for the prior on \eqn{\tau}.}
-
-\item{iterations}{Number of MCMC iterations}
-
-\item{burnin}{Number of burn in iterations}
-
-\item{thin}{Number of thinning iterations}
 
 \item{start_beta}{Beta starting vector. The default is \eqn{\beta}-hat.}
 }

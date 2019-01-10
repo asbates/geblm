@@ -23,36 +23,68 @@
 #'
 #' @export
 lm_proper <- function(data,
-                        formula,
-                        beta_prior_mean,
-                        beta_prior_cov,
-                        tau_prior_shape,
-                        tau_prior_rate,
-                        iterations = 5000,
-                        burnin = 5000,
-                        thin = 1,
-                        start_beta = NULL){
-  check_args_lm(data,
-                beta_prior_mean,
-                beta_prior_cov,
-                tau_prior_shape,
-                tau_prior_rate)
+                      formula,
+                      burnin = 5000,
+                      iterations = 5000,
+                      thin = 1,
+                      beta_prior_mean,
+                      beta_prior_cov,
+                      tau_prior_shape,
+                      tau_prior_rate,
+                      start_beta){
 
-  iterations <- checkmate::asInt(iterations, lower = 1)
-  burnin <- checkmate::asInt(burnin, lower = 1)
-  thin <- checkmate::asInt(thin, lower = 1)
+  checkmate::assert_data_frame(data, any.missing = FALSE)
+
+  if (!inherits(formula, "formula"))
+    stop("'formula' argument must be a formula.")
+
 
   fit <- stats::lm(formula, data, x = TRUE, y = TRUE)
   x <- fit$x
   y <- fit$y
+  p <- ncol(x)
 
-  if (is.null(start_beta)){
+  if (missing(beta_prior_mean)){
+    beta_prior_mean <- rep(0, p)
+  } else {
+    checkmate::assert_numeric(beta_prior_mean,
+                              len = p,
+                              any.missing = FALSE)
+  }
+
+  if (missing(beta_prior_cov)){
+    beta_prior_cov <- diag(p) * 100
+  } else {
+    checkmate::assert_matrix(beta_prior_cov,
+                             mode = "numeric",
+                             nrows = p,
+                             ncols = p,
+                             any.missing = FALSE)
+  }
+
+  if (missing(tau_prior_shape)){
+    tau_prior_shape <- 0.001
+  } else {
+    checkmate::assert_number(tau_prior_shape, lower = 0)
+  }
+
+  if (missing(tau_prior_rate)){
+    tau_prior_rate <- 0.001
+  } else {
+    checkmate::assert_number(tau_prior_rate, lower = 0)
+  }
+
+  if (missing(start_beta)){
     start_beta <- fit$coefficients
   } else {
     checkmate::assert_numeric(start_beta,
-                              any.missing = FALSE,
-                              len = dim(x)[1])
+                              len = p,
+                              any.missing = FALSE)
   }
+
+  iterations <- checkmate::asInt(iterations, lower = 1)
+  burnin <- checkmate::asInt(burnin, lower = 1)
+  thin <- checkmate::asInt(thin, lower = 1)
 
   result <- lm_proper_cpp(x,
                           y,

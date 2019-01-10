@@ -6,12 +6,8 @@ df <- fake_data_lm_proper(beta, sigma)
 
 fit <- lm_proper(df,
                  y ~ -1 + x1 + x2,
-                 beta_prior_mean = c(0,0),
-                 beta_prior_cov = diag(2) * 100,
-                 tau_prior_shape = 0.001,
-                 tau_prior_rate = 0.001,
-                 iterations = 1000,
-                 burnin = 1000
+                 burnin = 1000,
+                 iterations = 1000
 )
 
 beta_guess <- colMeans(fit$beta)
