@@ -1,7 +1,6 @@
 # geblm: Geometrically Ergodic Bayesian Linear Models
 
 [![Travis build status](https://travis-ci.org/asbates/geblm.svg?branch=master)](https://travis-ci.org/asbates/geblm)
-
 [![Coverage status](https://codecov.io/gh/asbates/geblm/branch/master/graph/badge.svg)](https://codecov.io/github/asbates/geblm?branch=master)
 
 geblm uses geometrically ergodic Gibbs samplers to provide posterior samples for Bayesian linear models and linear mixed models. Using Markov chains that converge at a geometric rate means that a central limit theorem exists and allows for computation of MCMC standard error estimates.
