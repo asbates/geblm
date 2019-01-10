@@ -2,37 +2,48 @@
 % Please edit documentation in R/lm_proper.R
 \name{lm_proper}
 \alias{lm_proper}
-\title{Fit a Bayesian linear model with Normal-Gamma prior via Gibbs Sampling.}
+\title{Fit a linear model with a proper prior.}
 \usage{
 lm_proper(data, formula, burnin = 5000, iterations = 5000, thin = 1,
   beta_prior_mean, beta_prior_cov, tau_prior_shape, tau_prior_rate,
   start_beta)
 }
 \arguments{
-\item{data}{A data frame containing the variables to be used in the model.}
+\item{data}{A data frame.}
 
-\item{formula}{A formula object describing the model fit.}
+\item{formula}{A formula describing the model fit. Passed to
+\code{stats::lm()} to construct the model matrix.}
 
-\item{burnin}{Number of burn in iterations}
+\item{burnin}{Number of burn in iterations.}
 
-\item{iterations}{Number of MCMC iterations}
+\item{iterations}{Number of sampling iterations.}
 
-\item{thin}{Number of thinning iterations}
+\item{thin}{Number of thinning iterations.}
 
-\item{beta_prior_mean}{Mean vector for the prior on \eqn{\beta}.}
+\item{beta_prior_mean}{(Optional) Mean vector for the prior on beta. Defaults
+to zero.}
 
-\item{beta_prior_cov}{Covariance matrix for the prior on \eqn{\beta}.}
+\item{beta_prior_cov}{(Optional) Covariance matrix for the prior on beta.
+Defaults to \code{diag(p) * 100} where p is the number of predictors.}
 
-\item{tau_prior_shape}{Shape parameter for the prior on \eqn{\tau}.}
+\item{tau_prior_shape}{(Optional) Shape parameter for the prior on tau.
+Defaults to 0.001.}
 
-\item{tau_prior_rate}{Rate parameter for the prior on \eqn{\tau}.}
+\item{tau_prior_rate}{(Optional) Rate parameter for the prior on tau.
+Defaults to 0.001.}
 
-\item{start_beta}{Beta starting vector. The default is \eqn{\beta}-hat.}
+\item{start_beta}{(Optional) Beta starting vector. Defaults to beta hat,
+the frequentist estimate.}
 }
 \value{
-A data frame containing MCMC samples from the posterior distribution.
+A list containing MCMC samples from the posterior distributions of
+    beta and the error standard deviation sigma.
 }
 \description{
-Fits a Bayesian linear regression model with a Normal prior on beta and a
-Gamma prior on the precision tau. Model fitting is done via a Gibbs sampler.
+Fits a Bayesian linear regression model with a normal prior on beta and a
+    gamma prior on the precision tau. 'Wide' priors are used by default.
+}
+\examples{
+fit <- lm_proper(mtcars, mpg ~ wt)
+
 }

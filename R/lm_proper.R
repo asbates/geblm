@@ -1,25 +1,34 @@
-#' Fit a Bayesian linear model with Normal-Gamma prior via Gibbs Sampling.
+#' Fit a linear model with a proper prior.
 #'
-#' Fits a Bayesian linear regression model with a Normal prior on beta and a
-#' Gamma prior on the precision tau. Model fitting is done via a Gibbs sampler.
+#' Fits a Bayesian linear regression model with a normal prior on beta and a
+#'     gamma prior on the precision tau. 'Wide' priors are used by default.
 #'
 #'
-#' @param data A data frame containing the variables to be used in the model.
-#' @param formula A formula object describing the model fit.
-#' @param beta_prior_mean Mean vector for the prior on \eqn{\beta}.
-#' @param beta_prior_cov Covariance matrix for the prior on \eqn{\beta}.
-#' @param tau_prior_shape Shape parameter for the prior on \eqn{\tau}.
-#' @param tau_prior_rate Rate parameter for the prior on \eqn{\tau}.
-#' @param iterations Number of MCMC iterations
-#' @param burnin Number of burn in iterations
-#' @param thin Number of thinning iterations
-#' @param start_beta Beta starting vector. The default is \eqn{\beta}-hat.
+#' @param data A data frame.
+#' @param formula A formula describing the model fit. Passed to
+#'     \code{stats::lm()} to construct the model matrix.
+#' @param burnin Number of burn in iterations.
+#' @param iterations Number of sampling iterations.
+#' @param thin Number of thinning iterations.
+#' @param beta_prior_mean (Optional) Mean vector for the prior on beta. Defaults
+#'     to zero.
+#' @param beta_prior_cov (Optional) Covariance matrix for the prior on beta.
+#'     Defaults to \code{diag(p) * 100} where p is the number of predictors.
+#' @param tau_prior_shape (Optional) Shape parameter for the prior on tau.
+#'     Defaults to 0.001.
+#' @param tau_prior_rate (Optional) Rate parameter for the prior on tau.
+#'     Defaults to 0.001.
+#' @param start_beta (Optional) Beta starting vector. Defaults to beta hat,
+#'     the frequentist estimate.
 #'
-#' @return A data frame containing MCMC samples from the posterior distribution.
-#'
+#' @return A list containing MCMC samples from the posterior distributions of
+#'     beta and the error standard deviation sigma.
 #'
 #' @import stats
 #' @import checkmate
+#'
+#' @examples
+#' fit <- lm_proper(mtcars, mpg ~ wt)
 #'
 #' @export
 lm_proper <- function(data,
