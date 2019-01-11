@@ -24,7 +24,6 @@
 #' @import checkmate
 #'
 #' @export
-
 lmm_improper <- function(data,
                          formula,
                          burnin = 5000,
@@ -38,10 +37,6 @@ lmm_improper <- function(data,
 
   if (!inherits(formula, "formula"))
     stop("'formula' argument must be a formula.")
-
-  check_args_lmm_improper(data,
-                          tau_prior_shape,
-                          tau_prior_rate)
 
   fit <- lme4::lmer(formula, data = data)
   x <- lme4::getME(fit, "X")
@@ -93,10 +88,11 @@ lmm_improper <- function(data,
                              start_theta)
 
   result$beta <- as.data.frame(result$beta)
+  result$u <- as.data.frame(result$u)
   result$sigma <- as.data.frame(result$sigma)
 
   names(result$beta) <- stats::variable.names(x)
-  names(result$u) <- paste0(names(u), "[", rownames(u), "]")
+  names(result$u) <- paste0(names(rand_effect), "[", rownames(rand_effect), "]")
   names(result$sigma) <- c("sigma[e]", "sigma[u]")
 
   return(result)

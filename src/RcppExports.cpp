@@ -6,6 +6,20 @@
 
 using namespace Rcpp;
 
+// conv_check_lmm_improper
+void conv_check_lmm_improper(Eigen::MatrixXd x, Eigen::VectorXd y, Eigen::MatrixXd z, Eigen::VectorXd a, Eigen::VectorXd b);
+RcppExport SEXP _geblm_conv_check_lmm_improper(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type z(zSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type a(aSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type b(bSEXP);
+    conv_check_lmm_improper(x, y, z, a, b);
+    return R_NilValue;
+END_RCPP
+}
 // mv_normal
 Eigen::VectorXd mv_normal(Eigen::VectorXd mu, Eigen::MatrixXd sigma);
 RcppExport SEXP _geblm_mv_normal(SEXP muSEXP, SEXP sigmaSEXP) {
@@ -50,11 +64,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// lmm_improper_cpp
+List lmm_improper_cpp(Eigen::MatrixXd X, Eigen::MatrixXd Z, Eigen::VectorXd y, Eigen::VectorXd lambda_prior_shape, Eigen::VectorXd lambda_prior_rate, int iterations, int burnin, int thin, Eigen::VectorXd start_theta);
+RcppExport SEXP _geblm_lmm_improper_cpp(SEXP XSEXP, SEXP ZSEXP, SEXP ySEXP, SEXP lambda_prior_shapeSEXP, SEXP lambda_prior_rateSEXP, SEXP iterationsSEXP, SEXP burninSEXP, SEXP thinSEXP, SEXP start_thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type lambda_prior_shape(lambda_prior_shapeSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type lambda_prior_rate(lambda_prior_rateSEXP);
+    Rcpp::traits::input_parameter< int >::type iterations(iterationsSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type thin(thinSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type start_theta(start_thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(lmm_improper_cpp(X, Z, y, lambda_prior_shape, lambda_prior_rate, iterations, burnin, thin, start_theta));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_geblm_conv_check_lmm_improper", (DL_FUNC) &_geblm_conv_check_lmm_improper, 5},
     {"_geblm_mv_normal", (DL_FUNC) &_geblm_mv_normal, 2},
     {"_geblm_uv_gamma", (DL_FUNC) &_geblm_uv_gamma, 2},
     {"_geblm_lm_proper_cpp", (DL_FUNC) &_geblm_lm_proper_cpp, 10},
+    {"_geblm_lmm_improper_cpp", (DL_FUNC) &_geblm_lmm_improper_cpp, 9},
     {NULL, NULL, 0}
 };
 

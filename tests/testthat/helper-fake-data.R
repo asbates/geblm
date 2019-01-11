@@ -12,22 +12,24 @@ fake_data_lm_proper <- function(beta, sigma, seed = 42){
 
 # make fake data for linear mixed model with improper prior
 
-fake_data_lmm_improper <- function(beta, sigma_e, sigma_u, seed = 42){
+fake_data_lmm_improper <- function(beta, sigma_e, sigma_u, seed = 15){
 
   set.seed(seed)
   n <- 50
   p <- length(beta)
-  q <- 3
+  q <- 4
 
   # design matrices
-  x <- matrix(rnorm(2 * n), ncol = 2)
+  x <- matrix(rnorm(p * n), ncol = p)
   z <- matrix(nrow = n, ncol = q)
   g1 <- 10
-  g2 <- 20
-  g3 <- 20
-  z[ , 1] <- c(rep(1, g1), rep(0, g2 + g3))
-  z[ , 2] <- c(rep(0, g1), rep(1, g2), rep(0, g3))
-  z[ , 3] <- c(rep(0, g1 + g2), rep(1, g3))
+  g2 <- 10
+  g3 <- 10
+  g4 <- 20
+  z[ , 1] <- c(rep(1, g1), rep(0, g2 + g3 + g4))
+  z[ , 2] <- c(rep(0, g1), rep(1, g2), rep(0, g3 + g4))
+  z[ , 3] <- c(rep(0, g1 + g2), rep(1, g3), rep(0, g4))
+  z[ , 4] <- c(rep(0, g1 + g2 + g3), rep(1, g4))
 
 
   # random effects
@@ -43,7 +45,8 @@ fake_data_lmm_improper <- function(beta, sigma_e, sigma_u, seed = 42){
   df <- data.frame(y, x,
                    group = c(rep("group1", g1),
                              rep("group2", g2),
-                             rep("group3", g3)))
+                             rep("group3", g3),
+                             rep("group4", g4)))
 
   list(df = df, u = u)
 }
