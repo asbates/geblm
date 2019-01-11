@@ -27,8 +27,10 @@ LinkingTo:
     Rcpp,
     RcppEigen
 Imports: 
+    checkmate,
+    lme4,
     Rcpp,
-    checkmate
+    stats
 RoxygenNote: 6.1.1
 Suggests: 
     testthat,
