@@ -2,36 +2,56 @@
 % Please edit documentation in R/lmm-improper.R
 \name{lmm_improper}
 \alias{lmm_improper}
-\title{Fit a Bayesian Generalized Linear Mixed Model With Improper Prior}
+\title{Fit a linear mixed model with an improper prior.}
 \usage{
 lmm_improper(data, formula, burnin = 5000, iterations = 5000,
   thin = 1, lambda_prior_shape, lambda_prior_rate, start_theta)
 }
 \arguments{
-\item{data}{A data frame containing the variables to be used in the model.}
+\item{data}{A data frame.}
 
-\item{formula}{A formula object describing the model fit.}
+\item{formula}{A formula describing the model fit. Passed to
+\code{\link[lme4:lmer]{lme4::lmer}} to construct model matrices.}
 
 \item{burnin}{Number of burn in iterations}
 
-\item{iterations}{Number of MCMC iterations}
+\item{iterations}{Number of sampling iterations}
 
 \item{thin}{Number of thinning iterations}
 
-\item{lambda_prior_shape}{A length 2 vector containing the shape for the prior
-on \eqn{\lambda_e} and \eqn{\lambda_u}, in that order.}
+\item{lambda_prior_shape}{(Optional) Shape parameter for the prior on the
+precision of the error term and random effects, in that order. Defaults
+to \code{c(0, -0.5)}.}
 
-\item{lambda_prior_rate}{A length 2 vector containing the rate for the prior
-on \eqn{\lambda_e} and \eqn{\lambda_u}, in that order.}
+\item{lambda_prior_rate}{(Optional) Rate parameter for the prior on the
+precision of the error term and random effects, in that order. Defaults
+to \code{c(0, 0)}.}
 
-\item{start_theta}{Starting vector for \eqn{\theta = (\beta' u')'}.
-Default is the frequentist guess.}
+\item{start_theta}{(Optional) Starting vector for
+\eqn{\theta = (\beta' u')'}, the concatenation of the fixed and random
+effects coefficients. Defaults to the frequentist estimate.}
 }
 \value{
-A list containing MCMC samples from the posterior distribution of
- \eqn{\beta}, \eqn{u}, \eqn{\sigma_e}, and \eqn{\sigma_u}.
+A list containing MCMC samples from the posterior distributions of
+ the fixed effects, random effects, and standard deviations for the error
+ term and fixed effects.
 }
 \description{
-Fists a Generalized Linear Model with a flat prior on \eqn{\beta} and
-improper Gamma priors on the precision for \eqn{u} and \eqn{e}.
+Fits a Bayesian linear mixed model with a flat prior on beta and improper
+    gamma prior on the precision lambda for the fixed effects and error term.
+    A standard reference prior for lambda is used by default. The formula
+    syntax is the same as \code{\link[lme4:lmer]{lme4::lmer}} which is used
+    to obtain the model matrices. Only a singleintercept is supported for
+    the random effects.
+}
+\section{Warning}{
+
+We leave it to the user to ensure only a single intercept is specified
+    in the model formula.
+}
+
+\references{
+Roman, J. C. and Hobert, J. P. (2012).
+    Convergence analysis of the Gibbs sampler for Bayesian general linear
+    mixed models with improper priors. Annals of Statistics, 40 2823–2849.
 }
