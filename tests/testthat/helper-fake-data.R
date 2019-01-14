@@ -10,9 +10,8 @@ fake_data_lm_proper <- function(beta, sigma, seed = 42){
 }
 
 
-# make fake data for linear mixed model with improper prior
-
-fake_data_lmm_improper <- function(beta, sigma_e, sigma_u, seed = 15){
+# make fake data for linear mixed model
+fake_data_lmm <- function(beta, sigma_e, sigma_u, seed = 15){
 
   set.seed(seed)
   n <- 50

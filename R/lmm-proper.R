@@ -125,17 +125,17 @@ lmm_proper <- function(data,
   iterations <- checkmate::asInt(iterations, lower = 1)
   thin <- checkmate::asInt(thin, lower = 1)
 
-  result <- glmm_proper_cpp(x,
-                            z,
-                            y,
-                            beta_prior_mean,
-                            beta_prior_cov,
-                            lambda_prior_shape,
-                            lambda_prior_rate,
-                            iterations,
-                            burnin,
-                            thin,
-                            start_theta)
+  result <- lmm_proper_cpp(x,
+                           z,
+                           y,
+                           beta_prior_mean,
+                           beta_prior_cov,
+                           lambda_prior_shape,
+                           lambda_prior_rate,
+                           iterations,
+                           burnin,
+                           thin,
+                           start_theta)
 
 
   result$beta <- as.data.frame(result$beta)
@@ -145,5 +145,7 @@ lmm_proper <- function(data,
   names(result$beta) <- stats::variable.names(x)
   names(result$u) <- paste0(names(rand_effect), "[", rownames(rand_effect), "]")
   names(result$sigma) <- c("sigma[e]", "sigma[u]")
+
+  return(result)
 
 }

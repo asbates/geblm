@@ -83,6 +83,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// lmm_proper_cpp
+List lmm_proper_cpp(Eigen::MatrixXd x, Eigen::MatrixXd z, Eigen::VectorXd y, Eigen::VectorXd beta_prior_mean, Eigen::MatrixXd beta_prior_cov, Eigen::VectorXd lambda_prior_shape, Eigen::VectorXd lambda_prior_rate, int iterations, int burnin, int thin, Eigen::VectorXd start_theta);
+RcppExport SEXP _geblm_lmm_proper_cpp(SEXP xSEXP, SEXP zSEXP, SEXP ySEXP, SEXP beta_prior_meanSEXP, SEXP beta_prior_covSEXP, SEXP lambda_prior_shapeSEXP, SEXP lambda_prior_rateSEXP, SEXP iterationsSEXP, SEXP burninSEXP, SEXP thinSEXP, SEXP start_thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type z(zSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type beta_prior_mean(beta_prior_meanSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type beta_prior_cov(beta_prior_covSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type lambda_prior_shape(lambda_prior_shapeSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type lambda_prior_rate(lambda_prior_rateSEXP);
+    Rcpp::traits::input_parameter< int >::type iterations(iterationsSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type thin(thinSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type start_theta(start_thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(lmm_proper_cpp(x, z, y, beta_prior_mean, beta_prior_cov, lambda_prior_shape, lambda_prior_rate, iterations, burnin, thin, start_theta));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_geblm_conv_check_lmm_improper", (DL_FUNC) &_geblm_conv_check_lmm_improper, 5},
@@ -90,6 +111,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geblm_uv_gamma", (DL_FUNC) &_geblm_uv_gamma, 2},
     {"_geblm_lm_proper_cpp", (DL_FUNC) &_geblm_lm_proper_cpp, 10},
     {"_geblm_lmm_improper_cpp", (DL_FUNC) &_geblm_lmm_improper_cpp, 9},
+    {"_geblm_lmm_proper_cpp", (DL_FUNC) &_geblm_lmm_proper_cpp, 11},
     {NULL, NULL, 0}
 };
 

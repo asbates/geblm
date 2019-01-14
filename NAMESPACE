@@ -2,6 +2,7 @@
 
 export(lm_proper)
 export(lmm_improper)
+export(lmm_proper)
 import(checkmate)
 import(lme4)
 import(stats)

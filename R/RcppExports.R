@@ -21,3 +21,7 @@ lmm_improper_cpp <- function(X, Z, y, lambda_prior_shape, lambda_prior_rate, ite
     .Call(`_geblm_lmm_improper_cpp`, X, Z, y, lambda_prior_shape, lambda_prior_rate, iterations, burnin, thin, start_theta)
 }
 
+lmm_proper_cpp <- function(x, z, y, beta_prior_mean, beta_prior_cov, lambda_prior_shape, lambda_prior_rate, iterations, burnin, thin, start_theta) {
+    .Call(`_geblm_lmm_proper_cpp`, x, z, y, beta_prior_mean, beta_prior_cov, lambda_prior_shape, lambda_prior_rate, iterations, burnin, thin, start_theta)
+}
+

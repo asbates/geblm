@@ -1,4 +1,4 @@
-context("lmm improper")
+context("lmm proper")
 
 beta <- c(10, 15)
 sigma <- c(2,2)
@@ -6,14 +6,15 @@ fake_data <- fake_data_lmm(beta, sigma[1], sigma[2])
 df <- fake_data$df
 u <- fake_data$u
 
-fit <- lmm_improper(df,
-                    y ~ X1 + X2 - 1 + (1|group),
-                    burnin = 1000,
-                    iterations = 1000)
+fit <- lmm_proper(df,
+                  y ~ X1 + X2 - 1 + (1|group),
+                  burnin = 1000,
+                  iterations = 1000)
 
 beta_guess <- colMeans(fit$beta)
 u_guess <- colMeans(fit$u)
 sigma_guess <- colMeans(fit$sigma)
+
 
 
 test_that("estimates are close to true value", {
@@ -52,22 +53,11 @@ test_that("output doesn't have missing values", {
 })
 
 test_that("convergence check outputs message on success", {
-  expect_output(lmm_improper(df,
-                              y ~ X1 + X2 - 1 + (1|group),
-                              burnin = 1,
-                              iterations = 1),
-                 "Conditions for geometric convergence are satisfied.")
+  expect_output(lmm_proper(df,
+                           y ~ X1 + X2 - 1 + (1|group),
+                           burnin = 1,
+                           iterations = 1),
+                "Conditions for geometric convergence are satisfied.")
 })
 
-test_that("convergence check outputs warning on failure", {
-  # ((au < bu) and bu == 0) or (bu > 0) )
-  a <- c(0,0)
-  b <- c(0,0)
-  expect_warning(lmm_improper(df,
-                              y ~ X1 + X2 - 1 + (1|group),
-                              burnin = 1,
-                              iterations = 1,
-                              lambda_prior_shape = a,
-                              lambda_prior_rate = b),
-                 "Conditions for geometric convergence are not satisfied.")
-})
+

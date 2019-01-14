@@ -1,6 +1,6 @@
 #include <RcppEigen.h>
 #include "draw_samples.h"
-#include "convergence_checks.h"
+#include "conv-checks.h"
 
 // [[Rcpp::depends(RcppEigen)]]
 
