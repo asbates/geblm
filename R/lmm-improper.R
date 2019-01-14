@@ -62,7 +62,7 @@ lmm_improper <- function(data,
   y <- lme4::getME(fit, "y")
 
   p <- ncol(x)
-  q <- 1
+  q <- ncol(z)
 
   if ( missing(lambda_prior_shape) ){
     lambda_prior_shape <- c(0, -0.5)

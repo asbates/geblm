@@ -58,3 +58,51 @@ void conv_check_lmm_improper(Eigen::MatrixXd x,
   }
 
 }
+
+
+void conv_check_lmm_proper(Eigen::MatrixXd z,
+                            Eigen::VectorXd a){
+  double ae = a(0);
+  double au = a(1);
+
+  double n = z.rows();
+
+  int rank_z = z.colPivHouseholderQr().rank();
+
+  bool pass_strong_condition1 = true;
+  bool pass_strong_condition2 = true;
+
+  Function msg("message");
+
+  if ( not (n > rank_z + 2) ) pass_strong_condition1 = false;
+
+  if ( not (rank_z > 2) ) pass_strong_condition2 = false;
+
+  if (pass_strong_condition1 and pass_strong_condition2){
+    Rcout << "Conditions for geometric convergence are satisfied." << std::endl;
+  } else {
+
+    bool pass_weak_condition1 = true;
+    bool pass_weak_condition2 = true;
+    Eigen::VectorXd ae_compare(2);
+    ae_compare << 1.0 - 0.5 * (n - rank_z), 0.0;
+
+    Eigen::VectorXd au_compare(2);
+    au_compare << 1.0 - 0.5 * rank_z, 0.0;
+
+    if ( not(ae > ae_compare.maxCoeff()) ) pass_weak_condition1 = false;
+
+    if ( not(au > au_compare.maxCoeff()) ) pass_weak_condition2 = false;
+
+    if (pass_weak_condition1 and pass_weak_condition2){
+
+      Rcout << "Conditions for geometric convergence are satisfied." << std::endl;
+
+    } else{
+
+      warning("Conditions for geometric convergence are not satisfied.");
+    }
+
+  }
+
+}

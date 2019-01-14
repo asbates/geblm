@@ -15,4 +15,7 @@ void conv_check_lmm_improper(Eigen::MatrixXd x,
                               Eigen::VectorXd a,
                               Eigen::VectorXd b);
 
+void conv_check_lmm_proper(Eigen::MatrixXd z,
+                           Eigen::VectorXd a);
+
 #endif
