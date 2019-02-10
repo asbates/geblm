@@ -116,8 +116,8 @@ lmm_improper <- function(data,
   names(result$sigma) <- c("sigma[e]", "sigma[u]")
 
   result$model_type <- "lmm_improper"
-  result$z <- z
   result$x <- x
+  result$z <- z
 
   class(result) <- c("geblm", class(result))
 
