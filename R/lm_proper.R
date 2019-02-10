@@ -111,6 +111,7 @@ lm_proper <- function(data,
   names(result$beta) <- stats::variable.names(fit)
   names(result$sigma) <- "sigma"
 
+  result$conv_checks <- TRUE
   result$model_type <- "lm_proper"
   result$x <- x
 
