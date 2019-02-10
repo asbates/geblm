@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 conv_check_lmm_improper <- function(x, y, z, a, b) {
-    invisible(.Call(`_geblm_conv_check_lmm_improper`, x, y, z, a, b))
+    .Call(`_geblm_conv_check_lmm_improper`, x, y, z, a, b)
 }
 
 mv_normal <- function(mu, sigma) {

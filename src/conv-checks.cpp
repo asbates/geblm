@@ -5,7 +5,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-void conv_check_lmm_improper(Eigen::MatrixXd x,
+bool conv_check_lmm_improper(Eigen::MatrixXd x,
                               Eigen::VectorXd y,
                               Eigen::MatrixXd z,
                               Eigen::VectorXd a,
@@ -57,10 +57,12 @@ void conv_check_lmm_improper(Eigen::MatrixXd x,
 
   }
 
+  return pass_check;
+
 }
 
 
-void conv_check_lmm_proper(Eigen::MatrixXd z,
+bool conv_check_lmm_proper(Eigen::MatrixXd z,
                             Eigen::VectorXd a){
   double ae = a(0);
   double au = a(1);
@@ -72,7 +74,8 @@ void conv_check_lmm_proper(Eigen::MatrixXd z,
   bool pass_strong_condition1 = true;
   bool pass_strong_condition2 = true;
 
-  Function msg("message");
+  bool pass_first_checks = true;
+  bool pass_second_checks = true;
 
   if ( not (n > rank_z + 2) ) pass_strong_condition1 = false;
 
@@ -81,6 +84,8 @@ void conv_check_lmm_proper(Eigen::MatrixXd z,
   if (pass_strong_condition1 and pass_strong_condition2){
     Rcout << "Conditions for geometric convergence are satisfied." << std::endl;
   } else {
+
+    pass_first_checks = false;
 
     bool pass_weak_condition1 = true;
     bool pass_weak_condition2 = true;
@@ -100,9 +105,11 @@ void conv_check_lmm_proper(Eigen::MatrixXd z,
 
     } else{
 
+      pass_second_checks = false;
       warning("Conditions for geometric convergence are not satisfied.");
     }
 
   }
 
+  return pass_first_checks or pass_second_checks;
 }

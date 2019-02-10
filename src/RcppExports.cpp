@@ -7,17 +7,18 @@
 using namespace Rcpp;
 
 // conv_check_lmm_improper
-void conv_check_lmm_improper(Eigen::MatrixXd x, Eigen::VectorXd y, Eigen::MatrixXd z, Eigen::VectorXd a, Eigen::VectorXd b);
+bool conv_check_lmm_improper(Eigen::MatrixXd x, Eigen::VectorXd y, Eigen::MatrixXd z, Eigen::VectorXd a, Eigen::VectorXd b);
 RcppExport SEXP _geblm_conv_check_lmm_improper(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP aSEXP, SEXP bSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Eigen::MatrixXd >::type x(xSEXP);
     Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
     Rcpp::traits::input_parameter< Eigen::MatrixXd >::type z(zSEXP);
     Rcpp::traits::input_parameter< Eigen::VectorXd >::type a(aSEXP);
     Rcpp::traits::input_parameter< Eigen::VectorXd >::type b(bSEXP);
-    conv_check_lmm_improper(x, y, z, a, b);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(conv_check_lmm_improper(x, y, z, a, b));
+    return rcpp_result_gen;
 END_RCPP
 }
 // mv_normal

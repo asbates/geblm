@@ -9,13 +9,13 @@
 
 using namespace Rcpp;
 
-void conv_check_lmm_improper(Eigen::MatrixXd x,
+bool conv_check_lmm_improper(Eigen::MatrixXd x,
                               Eigen::VectorXd y,
                               Eigen::MatrixXd z,
                               Eigen::VectorXd a,
                               Eigen::VectorXd b);
 
-void conv_check_lmm_proper(Eigen::MatrixXd z,
+bool conv_check_lmm_proper(Eigen::MatrixXd z,
                            Eigen::VectorXd a);
 
 #endif
