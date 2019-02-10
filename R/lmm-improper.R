@@ -35,6 +35,10 @@
 #'  the fixed effects, random effects, and standard deviations for the error
 #'  term and fixed effects.
 #'
+#'  @return An object of class \code{geblm} containing samples from the
+#'     posterior distributions of the fixed effects, random effects, and
+#'     standard deviations of the fixed effects and errors.
+#'
 #'
 #' @import lme4
 #' @import stats
@@ -107,10 +111,15 @@ lmm_improper <- function(data,
   result$beta <- as.data.frame(result$beta)
   result$u <- as.data.frame(result$u)
   result$sigma <- as.data.frame(result$sigma)
-
   names(result$beta) <- stats::variable.names(x)
   names(result$u) <- paste0(names(rand_effect), "[", rownames(rand_effect), "]")
   names(result$sigma) <- c("sigma[e]", "sigma[u]")
+
+  result$model_type <- "lmm_improper"
+  result$z <- z
+  result$x <- x
+
+  class(result) <- c("geblm", class(result))
 
   return(result)
 
