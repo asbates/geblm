@@ -31,7 +31,7 @@ test_that("output has correct format", {
                              "]"))
   expect_named(fit$sigma, c("sigma[e]", "sigma[u]"))
 
-  expect_is(fit, "list")
+  expect_is(fit, "geblm")
   expect_is(fit$beta, "data.frame")
   expect_is(fit$u, "data.frame")
   expect_is(fit$sigma, "data.frame")

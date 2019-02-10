@@ -55,7 +55,7 @@ List lmm_proper_cpp(Eigen::MatrixXd x,
   Eigen::VectorXd eta(p + q);
   Eigen::VectorXd diff(n);
 
-  conv_check_lmm_proper(z, lambda_prior_shape);
+  bool conv_checks_pass = conv_check_lmm_proper(z, lambda_prior_shape);
 
   for(int i = 0; i < burnin; i++){
 
@@ -110,7 +110,8 @@ List lmm_proper_cpp(Eigen::MatrixXd x,
   return List::create(
     Named("beta") = beta_out,
     Named("u") = u_out,
-    Named("sigma") = sigma_out
+    Named("sigma") = sigma_out,
+    Named("conv_checks") = conv_checks_pass
   );
 
 }

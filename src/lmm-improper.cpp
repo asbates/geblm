@@ -52,11 +52,11 @@ List lmm_improper_cpp(Eigen::MatrixXd X,
 
   double check;
 
-  conv_check_lmm_improper(X,
-                           y,
-                           Z,
-                           lambda_prior_shape,
-                           lambda_prior_rate);
+  bool conv_checks_pass = conv_check_lmm_improper(X,
+                                                  y,
+                                                  Z,
+                                                  lambda_prior_shape,
+                                                  lambda_prior_rate);
 
   for(int i = 0; i < burnin; i++){
 
@@ -126,6 +126,7 @@ List lmm_improper_cpp(Eigen::MatrixXd X,
   return List::create(
     Named("beta") = beta_out,
     Named("u") = u_out,
-    Named("sigma") = sigma_out
+    Named("sigma") = sigma_out,
+    Named("conv_checks") = conv_checks_pass
   );
 }

@@ -35,6 +35,10 @@ effects coefficients. Defaults to the frequentist estimate.}
 A list containing MCMC samples from the posterior distributions of
  the fixed effects, random effects, and standard deviations for the error
  term and fixed effects.
+
+ @return An object of class \code{geblm} containing samples from the
+    posterior distributions of the fixed effects, random effects, and
+    standard deviations of the fixed effects and errors.
 }
 \description{
 Fits a Bayesian linear mixed model with a flat prior on beta and improper

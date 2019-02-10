@@ -36,8 +36,8 @@ Defaults to 0.001.}
 the frequentist estimate.}
 }
 \value{
-A list containing MCMC samples from the posterior distributions of
-    beta and the error standard deviation sigma.
+An object of class \code{geblm} containing samples from the
+    posterior distributions of beta and sigma.
 }
 \description{
 Fits a Bayesian linear regression model with a normal prior on beta and a

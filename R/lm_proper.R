@@ -21,8 +21,8 @@
 #' @param start_beta (Optional) Beta starting vector. Defaults to beta hat,
 #'     the frequentist estimate.
 #'
-#' @return A list containing MCMC samples from the posterior distributions of
-#'     beta and the error standard deviation sigma.
+#' @return An object of class \code{geblm} containing samples from the
+#'     posterior distributions of beta and sigma.
 #'
 #' @import stats
 #' @import checkmate
@@ -108,9 +108,14 @@ lm_proper <- function(data,
 
   result$beta <- as.data.frame(result$beta)
   result$sigma <- as.data.frame(result$sigma)
-  #result$x <- x
-  #result$y <- y
   names(result$beta) <- stats::variable.names(fit)
   names(result$sigma) <- "sigma"
+
+  result$conv_checks <- TRUE
+  result$model_type <- "lm_proper"
+  result$x <- x
+
+  class(result) <- c("geblm", class(result))
+
   return(result)
 }

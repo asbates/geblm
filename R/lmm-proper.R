@@ -35,10 +35,9 @@
 #'     \eqn{\theta = (\beta' u')'}, the concatenation of the fixed and random
 #'     effects coefficients. Defaults to the frequentist estimate.
 #'
-#' @return A list containing MCMC samples from the posterior distributions of
-#'  the fixed effects, random effects, and standard deviations for the error
-#'  term and fixed effects.
-#'
+#' @return An object of class \code{geblm} containing samples from the
+#'     posterior distributions of the fixed effects, random effects, and
+#'     standard deviations of the fixed effects and errors.
 #'
 #' @import lme4
 #' @import stats
@@ -141,10 +140,15 @@ lmm_proper <- function(data,
   result$beta <- as.data.frame(result$beta)
   result$u <- as.data.frame(result$u)
   result$sigma <- as.data.frame(result$sigma)
-
   names(result$beta) <- stats::variable.names(x)
   names(result$u) <- paste0(names(rand_effect), "[", rownames(rand_effect), "]")
   names(result$sigma) <- c("sigma[e]", "sigma[u]")
+
+  result$model_type <- "lmm_proper"
+  result$x <- x
+  result$z <- z
+
+  class(result) <- c("geblm", class(result))
 
   return(result)
 
